@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Huncho Machine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="data.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--red:#CC1B1B;--bg:#08090c;--panel:#101319;--panel2:#151922;--line:#262b36;--text:#f2f4f8;--muted:#8f98a8;--good:#21c17a;--warn:#f0b429;--display:'Barlow Condensed','Arial Narrow',Arial,sans-serif}
+html,body{height:100%;background:#050506;color:var(--text);font-family:Inter,Arial,sans-serif}
+.shell{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(380px,1fr);height:100vh}
+.site{position:relative;border-right:1px solid var(--line);display:flex;flex-direction:column;min-width:0}
+.chrome{height:38px;display:flex;align-items:center;gap:8px;padding:0 14px;background:#111;border-bottom:1px solid #222;flex:none}
+.chrome i{width:11px;height:11px;border-radius:50%;background:#333;display:block}
+.chrome i:nth-child(1){background:#ff5f57}.chrome i:nth-child(2){background:#febc2e}.chrome i:nth-child(3){background:#28c840}
+.chrome .url{flex:1;margin-left:10px;height:24px;border-radius:6px;background:#1c1c1c;color:#9a9a9a;font-size:12.5px;display:flex;align-items:center;padding:0 12px}
+.site iframe{flex:1;width:100%;border:0;background:#080808}
+
+.m{display:flex;flex-direction:column;min-width:0;background:var(--bg);height:100vh}
+.m-top{flex:none;padding:14px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px}
+.m-top img{height:30px}
+.m-top .t{font-family:var(--display);font-weight:900;font-size:22px;letter-spacing:.04em;text-transform:uppercase;line-height:1}
+.m-top .t span{color:var(--red)}
+.m-top .demo{display:flex;align-items:center;gap:6px;padding:4px 9px;border-radius:999px;border:1px solid var(--line);font-size:11px;font-weight:600;color:#c9ced8;white-space:nowrap}
+.m-top .demo i{width:6px;height:6px;border-radius:50%;background:var(--red);display:block}
+.m-top .live{margin-left:auto;display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted)}
+.m-top .live b{width:8px;height:8px;border-radius:50%;background:var(--good);box-shadow:0 0 0 0 rgba(33,193,122,.6);animation:pulse 1.6s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 8px rgba(33,193,122,0)}100%{box-shadow:0 0 0 0 rgba(33,193,122,0)}}
+.m-top .clock{font-variant-numeric:tabular-nums;color:var(--text);font-weight:600}
+
+.lead{flex:none;margin:14px 18px 0;border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:14px 16px}
+.lead .row1{display:flex;align-items:center;gap:10px}
+.lead .av{width:38px;height:38px;border-radius:50%;background:#1f2430;display:flex;align-items:center;justify-content:center;font-weight:800;color:#c9ced8}
+.lead .nm{font-weight:700;font-size:16px}
+.lead .sub{font-size:12.5px;color:var(--muted);margin-top:2px}
+.chip{margin-left:auto;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 10px;border-radius:999px;background:#1f2430;color:var(--muted);white-space:nowrap}
+.chip.go{background:rgba(33,193,122,.14);color:var(--good)}
+.chip.red{background:rgba(204,27,27,.18);color:#ff6b6b}
+.chip.warn{background:rgba(240,180,41,.15);color:var(--warn)}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px}
+.fact{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:6px 9px;min-height:44px;min-width:0}
+.fact small{display:block;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.fact div{font-size:12px;font-weight:600;margin-top:2px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fact.on{border-color:#3a2226}
+
+.cols{flex:1;min-height:0;display:grid;grid-template-rows:minmax(0,1fr) auto}
+.feed{overflow:auto;padding:14px 18px 18px;scroll-behavior:smooth}
+.empty{color:var(--muted);font-size:14px;line-height:1.6;border:1px dashed var(--line);border-radius:12px;padding:18px;text-align:center;margin-top:6px}
+.ev{display:grid;grid-template-columns:28px 1fr;gap:10px;margin-bottom:14px;animation:in .35s ease}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.ev .ic{width:28px;height:28px;border-radius:8px;background:#1f2430;display:flex;align-items:center;justify-content:center;font-size:14px}
+.ev .ic.r{background:rgba(204,27,27,.2)}.ev .ic.g{background:rgba(33,193,122,.16)}.ev .ic.y{background:rgba(240,180,41,.16)}
+.ev .hd{display:flex;align-items:baseline;gap:8px}
+.ev .hd b{font-size:14px}
+.ev .hd time{margin-left:auto;font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.ev .note{font-size:12.5px;color:var(--muted);margin-top:3px;line-height:1.45}
+.sms{margin-top:8px;max-width:92%;background:#1d6ff2;color:#fff;border-radius:16px 16px 16px 4px;padding:10px 13px;font-size:13.5px;line-height:1.45;white-space:pre-wrap}
+.sms.in{background:#2a2f3a;margin-left:auto;border-radius:16px 16px 4px 16px;max-width:60%}
+.sms-to{font-size:11px;color:var(--muted);margin-top:8px}
+.mail{margin-top:8px;border:1px solid var(--line);border-radius:10px;background:#fff;color:#1a1a1a;overflow:hidden}
+.mail .mh{padding:9px 12px;border-bottom:1px solid #eee;font-size:12px;color:#555;line-height:1.5}
+.mail .mh b{color:#111}
+.mail .mb{padding:12px;font-size:13px;line-height:1.55;white-space:pre-wrap}
+.mail .thumb{display:flex;gap:10px;align-items:center;margin:0 12px 12px;padding:8px;border:1px solid #eee;border-radius:8px;text-decoration:none;color:#111}
+.mail .thumb img{width:120px;aspect-ratio:16/9;object-fit:cover;border-radius:5px;background:#000}
+.mail .thumb b{font-size:13px;display:block}
+.mail .thumb span{font-size:12px;color:#666}
+.brief{margin-top:8px;border:1px solid #3a2226;background:linear-gradient(180deg,#1a0d0f,#120a0b);border-radius:10px;padding:12px 13px;font-size:13px;line-height:1.55}
+.brief h5{font-family:var(--display);font-weight:900;font-size:17px;letter-spacing:.04em;text-transform:uppercase;margin-bottom:6px}
+.brief h5 span{color:#ff6b6b}
+.brief dl{display:grid;grid-template-columns:auto 1fr;gap:3px 12px}
+.brief dt{color:var(--muted)}
+.brief .say{margin-top:9px;padding-top:9px;border-top:1px solid #3a2226}
+.brief .say b{color:#ff8a8a}
+.act{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.act button{font:600 12.5px Inter,sans-serif;border-radius:8px;padding:7px 11px;border:1px solid var(--line);background:var(--panel2);color:var(--text);cursor:pointer}
+.act button:hover{border-color:var(--red)}
+.act button.pri{background:var(--red);border-color:var(--red)}
+
+.queue{border-top:1px solid var(--line);background:#0b0d11;padding:10px 18px 12px;max-height:27vh;overflow:auto}
+.queue .qh{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.queue .qh b{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.queue .qh button{margin-left:auto;font:700 12px Inter,sans-serif;background:var(--red);color:#fff;border:0;border-radius:8px;padding:8px 12px;cursor:pointer}
+.queue .qh button:disabled{opacity:.35;cursor:default}
+.queue .qh .ghost{margin-left:0;background:transparent;border:1px solid var(--line);color:var(--muted)}
+.qi{display:flex;align-items:center;gap:10px;font-size:12.5px;padding:7px 0;border-bottom:1px solid #161a22}
+.qi:last-child{border-bottom:0}
+.qi .when{flex:none;width:96px;color:var(--warn);font-variant-numeric:tabular-nums;font-weight:600}
+.qi .what{flex:1;color:#cfd4dd}
+.qi .unless{color:var(--muted);font-size:11.5px}
+.qi.gone{opacity:.35;text-decoration:line-through}
+.qempty{font-size:12.5px;color:var(--muted)}
+@media (max-width:1100px){.shell{grid-template-columns:1fr;height:auto}.site{height:80vh}.m{height:auto;min-height:100vh}}
+</style>
+</head>
+<body data-notag>
+<div class="shell">
+  <section class="site">
+    <div class="chrome"><i></i><i></i><i></i><div class="url">hunchoprogram.com</div></div>
+    <iframe id="site" src="index.html" title="Huncho Program"></iframe>
+  </section>
+
+  <section class="m">
+    <div class="m-top">
+      <img id="mlogo" alt="">
+      <div class="t">Huncho <span>Machine</span></div>
+      <div class="demo"><i></i>Demo build for Huncho</div>
+      <div class="live"><b></b><span class="clock" id="clock">--:--</span></div>
+    </div>
+
+    <div class="lead" id="lead">
+      <div class="row1">
+        <div class="av" id="av">?</div>
+        <div><div class="nm" id="nm">Waiting for an applicant</div><div class="sub" id="lsub">Source: YouTube, main channel</div></div>
+        <div class="chip" id="chip">Idle</div>
+      </div>
+      <div class="facts">
+        <div class="fact" id="f-goal"><small>Goal</small><div>&ndash;</div></div>
+        <div class="fact" id="f-age"><small>Age</small><div>&ndash;</div></div>
+        <div class="fact" id="f-country"><small>Location</small><div>&ndash;</div></div>
+        <div class="fact" id="f-invest"><small>Budget</small><div>&ndash;</div></div>
+        <div class="fact" id="f-match"><small>His match</small><div>&ndash;</div></div>
+        <div class="fact" id="f-phone"><small>Phone</small><div>&ndash;</div></div>
+      </div>
+    </div>
+
+    <div class="cols">
+      <div class="feed" id="feed">
+        <div class="empty" id="empty">Click <b>Click Here To Apply</b> on his site and fill it in like a real lead.<br>Everything the machine does shows up here the second it happens.</div>
+      </div>
+      <div class="queue">
+        <div class="qh"><b>Coming up</b><button class="ghost" id="reset">Run again</button><button id="skip" disabled>Skip ahead &rsaquo;</button></div>
+        <div id="qlist"><div class="qempty">Nothing scheduled yet.</div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+(function(){
+  document.getElementById("mlogo").src = HX.LOGO;
+
+  /* The machine keeps its own clock so "Skip ahead" can jump to the next scheduled job. */
+  var offset = 0;
+  function now(){ return Date.now() + offset; }
+  /* All times shown in US Eastern, his time zone. */
+  function fmt(t){ return HX.etTime(t); }
+  function fmtDay(t){
+    var a = HX.etParts(t), b = HX.etParts(now());
+    var same = a.y === b.y && a.m === b.m && a.d === b.d;
+    return same ? fmt(t) : new Date(t).toLocaleDateString("en-US",{weekday:"short", timeZone:HX.TZ}) + " " + fmt(t);
+  }
+  setInterval(function(){ document.getElementById("clock").textContent = fmtDay(now()) + " ET"; }, 1000);
+
+  var L = {}, match = null, match2 = null, queue = [], seen = {};
+  var feed = document.getElementById("feed");
+
+  function esc(s){ return String(s == null ? "" : s).replace(/[&<>"]/g, function(c){ return ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[c]; }); }
+  function setFact(id, val){ var f = document.getElementById(id); f.querySelector("div").textContent = val; f.classList.add("on"); }
+  function chip(txt, cls){ var c = document.getElementById("chip"); c.textContent = txt; c.className = "chip " + (cls || ""); }
+  function first(){ return HX.first(L.name); }
+
+  function add(icon, cls, title, note, extra, t){
+    var e = document.getElementById("empty"); if (e) e.remove();
+    var ev = document.createElement("div"); ev.className = "ev";
+    ev.innerHTML = '<div class="ic ' + (cls||"") + '">' + icon + '</div><div><div class="hd"><b>' + esc(title) + '</b><time>' + fmtDay(t || now()) + '</time></div>' + (note ? '<div class="note">' + note + '</div>' : '') + (extra || '') + '</div>';
+    feed.appendChild(ev);
+    feed.scrollTop = feed.scrollHeight;
+    return ev;
+  }
+  function sms(text){ return '<div class="sms-to">Text to ' + esc(L.phone || "him") + '</div><div class="sms">' + esc(text) + '</div>'; }
+  function mail(subject, body, c){
+    var th = c ? '<a class="thumb" href="https://www.youtube.com/watch?v=' + c.yt + '" target="_blank" rel="noopener"><img src="' + HX.ytThumb(c.yt) + '" alt=""><div><b>' + esc(c.name) + '</b><span>' + esc(c.stat) + '</span></div></a>' : '';
+    return '<div class="mail"><div class="mh"><b>Huncho</b> &lt;support@sphuncho.com&gt;<br>To: ' + esc(L.email || "") + '<br>Subject: <b>' + esc(subject) + '</b></div><div class="mb">' + esc(body) + '</div>' + th + '</div>';
+  }
+
+  /* ── the queue: jobs that fire later unless something cancels them ── */
+  function schedule(id, inMs, label, unless, fn){
+    queue = queue.filter(function(j){ return j.id !== id; });
+    queue.push({id:id, at:now() + inMs, label:label, unless:unless, fn:fn});
+    drawQueue();
+  }
+  function cancel(id, why){
+    queue.forEach(function(j){ if (j.id === id && !j.gone){ j.gone = true; j.why = why; } });
+    drawQueue();
+    setTimeout(function(){ queue = queue.filter(function(j){ return !j.gone; }); drawQueue(); }, 2600);
+  }
+  function drawQueue(){
+    var q = document.getElementById("qlist"); var live = queue.slice().sort(function(a,b){ return a.at - b.at; });
+    document.getElementById("skip").disabled = !live.some(function(j){ return !j.gone; });
+    if (!live.length){ q.innerHTML = '<div class="qempty">' + (document.getElementById("empty") ? "Nothing scheduled yet." : "Queue is clear. Nothing waiting.") + '</div>'; return; }
+    q.innerHTML = live.map(function(j){
+      return '<div class="qi' + (j.gone ? ' gone' : '') + '"><span class="when">' + fmtDay(j.at) + '</span><span class="what">' + esc(j.label) + (j.unless ? '<br><span class="unless">' + esc(j.gone && j.why ? "Cancelled: " + j.why : "Unless " + j.unless) + '</span>' : '') + '</span></div>';
+    }).join("");
+  }
+  function runDue(){
+    var due = queue.filter(function(j){ return !j.gone && j.at <= now(); }).sort(function(a,b){ return a.at - b.at; });
+    due.forEach(function(j){ j.gone = true; j.fn(j.at); });
+    if (due.length){ queue = queue.filter(function(j){ return !j.gone; }); drawQueue(); }
+  }
+  setInterval(runDue, 1000);
+  document.getElementById("skip").onclick = function(){
+    var next = queue.filter(function(j){ return !j.gone; }).sort(function(a,b){ return a.at - b.at; })[0];
+    if (!next) return;
+    offset += Math.max(0, next.at - now()) + 1000;
+    runDue();
+  };
+  document.getElementById("reset").onclick = function(){ location.reload(); };
+
+  /* ── what the page tells us ── */
+  HX.bus.on(function(msg){
+    var key = msg.type + ":" + msg.at; if (seen[key]) return; seen[key] = 1;
+    var d = msg.data || {};
+    if (msg.type === "started") onStarted();
+    else if (msg.type === "answer") onAnswer(d);
+    else if (msg.type === "contact") onContact(d);
+    else if (msg.type === "completed") (d.qualified ? onQualified(d) : onSentAway(d));
+    else if (msg.type === "booked") onBooked(d);
+    else if (msg.type === "confirm_video") onWatched();
+    else if (msg.type === "timeline_lead") onTimelineLead(d);
+  });
+
+  function onStarted(){
+    chip("Applying", "warn");
+    add("&#9654;", "", "Started the application", "Clicked <b>Click Here To Apply</b>. Came in from YouTube.");
+  }
+
+  function onAnswer(d){
+    if (d.id === "goal"){ L.goal = d.value; setFact("f-goal", d.value.replace(/…$/,"")); }
+    if (d.id === "age"){ L.age = d.value; setFact("f-age", d.value); }
+    if (d.id === "country"){ L.country = d.value; setFact("f-country", d.value); }
+    if (d.id === "invest"){ L.invest = d.value; setFact("f-invest", d.value); }
+    if (L.goal && L.age && (d.id === "goal" || d.id === "age" || !match)){
+      match = HX.matchCase(L.goal, HX.ageMid(L.age)); match2 = HX.matchCase2(L.goal, HX.ageMid(L.age), match);
+      setFact("f-match", match.name + " · " + match.stat);
+    }
+  }
+
+  function onContact(d){
+    var again = !!L.email;
+    L.name = d.name; L.phone = d.phone; L.email = d.email;
+    if (again){
+      document.getElementById("nm").textContent = d.name;
+      document.getElementById("lsub").textContent = d.email + " · Source: YouTube, main channel";
+      setFact("f-phone", d.phone);
+      return;
+    }
+    document.getElementById("nm").textContent = d.name;
+    document.getElementById("av").textContent = (d.name || "?").trim().split(/\s+/).map(function(w){ return w[0]; }).slice(0,2).join("").toUpperCase();
+    document.getElementById("lsub").textContent = d.email + " · Source: YouTube, main channel";
+    setFact("f-phone", d.phone);
+    add("&#128190;", "", "Lead saved", "Name, phone and email are in. From this second on, he does not get lost.");
+    schedule("rescue", 5*60e3, "Text him if the application stops halfway", "he finishes it", function(t){
+      chip("Stopped halfway", "warn");
+      add("&#128241;", "y", "Rescue text: application stopped halfway", "He gave his number then left. One text, in your voice.",
+        sms("Yo " + first() + ", Huncho here. Your application cut off halfway bro. 2 more questions and you're done 👉 hunchoprogram.com/apply\n\nDon't make this another Monday 😂"), t);
+      schedule("rescue2", 24*36e5, "Email: the client who started where he is", "he finishes it", function(t2){
+        add("&#9993;", "", "Rescue email, next day", "Shows him the one client who started where he is.",
+          mail("Bro, " + match.name + " was exactly where you are",
+            "Yo " + first() + ",\n\nYou started your application yesterday and didn't finish it. I get it. Most guys almost don't.\n\n" + match.name + " almost didn't either. " + match.stat + ".\n\nWatch his story below, then finish your application. It takes 30 seconds.\n\nhunchoprogram.com/apply\n\nSouthpawHuncho checking out, peace 🎤", match), t2);
+      });
+    });
+  }
+
+  function onQualified(d){
+    cancel("rescue", "he finished"); cancel("rescue2", "he finished");
+    chip("Qualified", "go");
+    add("&#10003;", "g", "Qualified", "USA or Canada, budget " + esc(L.invest) + ". The calendar is open on his screen.");
+    add("&#128241;", "", "Text, sent the same second", "So he is talking to you before he even picks a time.",
+      sms("Yo " + first() + ", Huncho here 💪 You qualify bro. The calendar's on your screen right now, grab a time. Takes 10 seconds."));
+    schedule("nobook", 15*60e3, "Text with " + match.name + "'s story if no call is booked", "he books", function(t){
+      chip("Didn't book", "warn");
+      add("&#128241;", "y", "Didn't book: follow-up text", "Qualified but walked away from the calendar. This brings him back.",
+        sms(first() + ", you qualified but didn't lock in your call.\n\n" + match.name + " was in the same spot. " + match.stat + ". Watch his story 👉 youtu.be/" + match.yt + "\n\nThen grab your time 👉 hunchoprogram.com/apply"), t);
+    });
+  }
+
+  function onBooked(d){
+    cancel("nobook", "he booked");
+    L.when = d.when; L.whenAt = new Date(d.whenISO).getTime();
+    chip("Booked", "go");
+    add("&#128197;", "g", "Call booked", esc(d.when) + ". Your closer now has everything below.");
+    add("&#128241;", "", "Confirmation text", "Your rule: unconfirmed calls get released after 24 hours. So the text asks for a YES.",
+      sms("Locked in bro 🔒 " + d.when + " (Eastern).\n\nReply YES to confirm your spot. Unconfirmed calls get released to the waitlist after 24 hours."),
+    );
+    var replyEv = add("&#128172;", "", "Waiting for his reply", "On the call he says YES. For the demo, press the button.",
+      '<div class="act"><button class="pri" id="yes">He replies YES</button><button id="quiet">He goes quiet</button></div>');
+    replyEv.querySelector("#yes").onclick = function(){ onYes(); replyEv.querySelector(".act").remove(); };
+    replyEv.querySelector("#quiet").onclick = function(){
+      replyEv.querySelector(".act").remove();
+      var r = queue.filter(function(j){ return j.id === "release" && !j.gone; })[0];
+      if (r){ offset += Math.max(0, r.at - now()) + 1000; runDue(); }
+    };
+
+    add("&#9993;", "", "Confirmation email with his match", "He sees a man like him before the call, so he shows up already sold.",
+      mail("You're locked in, " + first() + ". Watch this before the call",
+        "Yo " + first() + ",\n\nYour call is booked for " + d.when + " (Eastern). Zoom link is in your calendar invite.\n\nBefore we talk, watch " + match.name + "'s story. " + match.stat + ". He sat exactly where you're sitting.\n\nCome ready to keep it real about where you're at. That's all I ask.\n\nSouthpawHuncho checking out, peace 🎤", match));
+
+    brief();
+
+    var releaseIn = Math.min(24*36e5, L.whenAt - now() - 2*36e5);
+    if (releaseIn > 30*60e3) schedule("release", releaseIn, "Release the slot to the waitlist and text him", "he replies YES or watches the 5 min video", function(t){
+      chip("Released", "red"); L.released = true;
+      ["morning","hour","ten"].forEach(function(id){ cancel(id, "the slot was released"); });
+      var y = document.getElementById("yes"); if (y && y.parentNode) y.parentNode.remove();
+      add("&#9888;", "r", "No confirmation in 24 hours: slot released", "Your own rule, now automatic. The slot goes back to the waitlist and he gets one way back in.",
+        sms("Released your spot to the waitlist since it wasn't confirmed " + first() + ".\n\nStill want it? Reply BACK and we'll find you a new time."), t);
+    });
+    reminders();
+  }
+
+  function reminders(){
+    var w = L.whenAt;
+    var cp = HX.etParts(w), morning = HX.etDate(cp.y, cp.m, cp.d, 8, 30);
+    if (morning.getTime() > now()) schedule("morning", morning.getTime() - now(), "Morning-of text", "", function(t){
+      var at = HX.etTime(w);
+      if (L.confirmed) add("&#128241;", "", "Morning of the call", "", sms("Today's the day " + first() + " 💪 " + at + " Eastern.\n\nYou already did the hardest part by applying. Now just show up."), t);
+      else add("&#128241;", "y", "Morning of the call, still not confirmed", "", sms(first() + ", your call is today at " + at + " Eastern and it's still not confirmed.\n\nReply YES by " + HX.etTime(w - 2*36e5) + " or the spot goes to the waitlist."), t);
+    });
+    schedule("hour", Math.max(5e3, w - 60*60e3 - now()), "1 hour before: Zoom link", "", function(t){
+      add("&#128241;", "", "1 hour before", "", sms("1 hour out bro. Zoom link 👉 zoom.us/j/huncho\n\nBe somewhere quiet. Not driving 😂"), t);
+    });
+    schedule("ten", Math.max(6e3, w - 10*60e3 - now()), "10 minutes before: closer gets a heads-up", "", function(t){
+      add("&#128276;", "", "10 minutes before: closer pinged", "Your closer gets the brief again, with whether he confirmed and watched the video.", '', t);
+    });
+  }
+
+  function onYes(){
+    if (L.released) return;
+    L.confirmed = true;
+    cancel("release", "he replied YES");
+    chip("Confirmed", "go");
+    add("&#128172;", "", "He replied", "", '<div class="sms in">YES</div><div class="sms">Confirmed 💪 See you ' + esc(L.when) + '.</div>');
+    add("&#10003;", "g", "Confirmed. Closer notified", "Shows as confirmed in your pipeline. The slot is safe.");
+  }
+  function onWatched(){
+    if (L.released || !L.when || L.confirmed) return;
+    L.confirmed = true;
+    var y = document.getElementById("yes"); if (y && y.parentNode) y.parentNode.remove();
+    cancel("release", "he watched the 5 min video");
+    chip("Confirmed", "go");
+    add("&#9654;", "g", "Watched the 5 minute confirm video", "Counts as confirmed. The release job is off.");
+  }
+
+  function brief(){
+    var opener = {
+      lean: "You've been training, but you still can't see your abs. What have you tried that didn't stick?",
+      lose: "What's the number on the scale right now, and what number are you sick of seeing?",
+      health: "What made you decide your health can't wait anymore?",
+      muscle: "How long have you been lifting, and do you look like you lift with your shirt on?"
+    }[HX.goalTag(L.goal)];
+    add("&#128203;", "r", "Pre-call brief, sent to your closer", "Everything he needs before he says hello.",
+      '<div class="brief"><h5>Call brief: <span>' + esc(L.name) + '</span></h5><dl>' +
+      '<dt>When</dt><dd>' + esc(L.when) + '</dd>' +
+      '<dt>Wants</dt><dd>' + esc((L.goal || "").replace(/…$/,"")) + '</dd>' +
+      '<dt>Age</dt><dd>' + esc(L.age) + '</dd>' +
+      '<dt>Budget</dt><dd>' + esc(L.invest) + '</dd>' +
+      '<dt>From</dt><dd>YouTube, main channel</dd>' +
+      '<dt>Show him</dt><dd>' + esc(match.name) + ' (' + esc(match.stat) + '), then ' + esc(match2.name) + ' (' + esc(match2.stat) + ')</dd>' +
+      '</dl><div class="say"><b>Open with:</b> "' + esc(opener) + '"</div></div>');
+  }
+
+  function onSentAway(d){
+    cancel("rescue", "he finished"); cancel("rescue2", "he finished");
+    var reason = {age:"18 to 21", country:"outside the USA and Canada", invest:"no money to invest right now"}[d.reason] || "not a fit right now";
+    if (!L.email){
+      chip("Sent away", "red");
+      add("&#10007;", "r", "Sent away: " + reason, "He saw your full-capacity screen and the free 1 hour guide. He left before giving a number or email, so the machine logs him for your numbers and stops there.");
+      return;
+    }
+    chip("Not yet list", "red");
+    add("&#10007;", "r", "Sent away: " + reason, "He saw your full-capacity screen and the free 1 hour guide. Right now these leads go to Discord and stop. Here he goes on the Not Yet list instead.");
+    var c = match || HX.CASES[0];
+    var body = {
+      invest: "Yo " + first() + ",\n\nReal talk. Right now isn't the time, and that's fine.\n\nHere's what I'd do in your spot:\n1. Watch my full 1 hour guide, free 👉 youtu.be/" + HX.DQ_VIDEO + "\n2. Run your numbers on the Ripped Timeline. It tells you how far you are from 12% and how long it really takes.\n\nI'll check back in 30 days. Things change fast once you start.\n\nSouthpawHuncho checking out, peace 🎤",
+      age: "Yo " + first() + ",\n\nYou're young bro, that's the cheat code. Most of my clients wish they started at your age.\n\nWatch my full 1 hour guide, free 👉 youtu.be/" + HX.DQ_VIDEO + "\nThen run your numbers on the Ripped Timeline.\n\nSouthpawHuncho checking out, peace 🎤",
+      country: "Yo " + first() + ",\n\nRight now we only coach men in the USA and Canada. But the guide is free anywhere 👉 youtu.be/" + HX.DQ_VIDEO + "\n\nAnd the Ripped Timeline works wherever you are.\n\nSouthpawHuncho checking out, peace 🎤"
+    }[d.reason] || "";
+    add("&#9993;", "", "Not Yet email, sent right away", "", mail("Not yet. That's fine, " + first() + ".", body));
+    schedule("ny3", 3*864e5, "Day 3: email the client who started where he is", "", function(t){
+      add("&#9993;", "", "Not Yet: day 3", "", mail(c.name + ": " + c.stat, "Yo " + first() + ",\n\nThis is " + c.name + ". " + c.stat + ".\n\nHe didn't start ready either. Watch his story below.\n\nSouthpawHuncho checking out, peace 🎤", c), t);
+    });
+    schedule("ny7", 7*864e5, "Day 7: Ripped Timeline nudge", "", function(t){
+      add("&#9993;", "", "Not Yet: day 7", "", mail("How far are you from 12%?", "Yo " + first() + ",\n\nOne question. How many weeks are you from 12% body fat?\n\nMost guys guess wrong by months. Put your numbers in the Ripped Timeline and see the real date.\n\nSouthpawHuncho checking out, peace 🎤"), t);
+    });
+    if (d.reason === "invest") schedule("ny30", 30*864e5, "Day 30: invite him to apply again", "", function(t){
+      chip("Re-invited", "warn");
+      add("&#128241;", "y", "Not Yet: day 30, back in", "A man who said no money a month ago gets one clean way back in.",
+        sms("Yo " + first() + ", Huncho here. It's been 30 days. Where you at with it bro?\n\nIf you're ready now, applications are open 👉 hunchoprogram.com/apply"), t);
+    });
+  }
+
+  function onTimelineLead(d){
+    add("&#9201;", "", "Ripped Timeline: new lead", esc(d.name) + " checked his numbers. About " + esc(d.bf) + "% now, " + esc(d.weeks) + " weeks from 12%. Sent his timeline by email and added to the Not Yet list.");
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Huncho Program</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Inter:wght@400;500;600;700;900&family=Poppins:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<script src="https://fast.wistia.com/player.js" async></script>
+<script src="https://fast.wistia.com/embed/2q4m8xyilo.js" async type="module"></script>
+<script src="data.js"></script>
+</head>
+<body>
+<div id="ap-page">
+  <div class="topbar"><img class="top-logo" id="logo" alt="Huncho Fit"></div>
+
+  <div class="wrap">
+    <h1 class="h1-desktop">The <span class="red">Proven System</span> Men 30+ Are Using To:<br><span class="red">Lose 20-60 Lbs</span> of Stubborn Fat, <span class="red">Pack on Lean Muscle</span>,<br>And Finally Feel Confident Shirtless Again<br>in 90-180 Days</h1>
+    <h1 class="h1-mobile">The <span class="red">Proven System</span><br>Men 30+ Are Using to <span class="red">Lose<br>20-60 Lbs</span> of Stubborn Fat,<br><span class="red">Pack on Lean Muscle</span>, and<br>Finally Feel Confident Shirtless<br>Again in 90-180 Days</h1>
+    <p class="sub">Without Starving Themselves or Living in The Gym</p>
+    <div class="vsl"><wistia-player media-id="2q4m8xyilo" aspect="1.7777777777777777"></wistia-player></div>
+    <a href="#apply" class="cta apply-link" role="button">Click Here To Apply</a>
+
+    <div class="cal-wrap" id="apply">
+      <h2 class="book-h2"><span class="red">Book</span> Your Free Transformation Call</h2>
+      <div class="apply-card">
+        <div id="bar"><i></i></div>
+        <main id="app" aria-live="polite"></main>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap-wide">
+    <section class="sect">
+      <h2><span class="red">Real</span> Transformations</h2>
+      <div class="testimonial-grid" id="wall"></div>
+      <div class="testimonial-grid-secondary" id="wall2"></div>
+    </section>
+  </div>
+
+  <div class="wrap">
+    <section class="sect">
+      <h2>Every Man Here Started With This Exact Call.<br><span class="red">Apply For Yours Below.</span></h2>
+      <a href="#apply" class="cta apply-link" style="margin-top:1.8rem" role="button">Click Here To Apply</a>
+    </section>
+  </div>
+
+  <footer>
+    <div class="foot-mark">SOUTHPAW&nbsp;<span class="red">HUNCHO</span></div>
+    <p class="foot-line">&copy; <span id="ap-year"></span> Southpaw Huncho. All rights reserved.</p>
+    <p class="foot-contact"><a href="mailto:support@sphuncho.com">support@sphuncho.com</a><span style="margin:0 .5rem">&middot;</span>309 Coachman Drive, Simpsonville, SC 29681</p>
+    <div class="foot-links"><a href="#">Privacy Policy</a><a href="#">Terms &amp; Conditions</a><a href="#">Contact Us</a></div>
+    <p class="foot-disc">This site is not a part of the Facebook website or Facebook Inc. Additionally, this site is NOT endorsed by Facebook in any way. FACEBOOK is a trademark of FACEBOOK, Inc.</p>
+    <p class="foot-disc">Results shown are from specific clients and are not a guarantee of your results. Individual results vary based on effort, consistency, and starting point.</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  document.getElementById("logo").src = HX.LOGO;
+  document.getElementById("ap-year").textContent = new Date().getFullYear();
+
+  /* ── the wall of transformations ── */
+  function card(name, id, into){
+    var c = document.createElement("div"); c.className = "testimonial-card";
+    var v = document.createElement("div"); v.className = "testimonial-video";
+    var p = document.createElement("wistia-player"); p.setAttribute("media-id", id); p.setAttribute("aspect","0.5625");
+    p.style.backgroundImage = "url('https://fast.wistia.com/embed/medias/" + id + "/swatch')";
+    v.appendChild(p); c.appendChild(v);
+    var n = document.createElement("p"); n.className = "testimonial-name"; n.textContent = name; c.appendChild(n);
+    into.appendChild(c);
+    var s = document.createElement("script"); s.src = "https://fast.wistia.com/embed/" + id + ".js"; s.async = true; s.type = "module"; document.head.appendChild(s);
+  }
+  var wall = document.getElementById("wall"), wall2 = document.getElementById("wall2");
+  HX.WALL.forEach(function(t){ card(t[0], t[1], wall); });
+  HX.WALL_LAST.forEach(function(t){ card(t[0], t[1], wall2); });
+
+  /* ── the 5 question application, his wording and his rules ── */
+  var QUESTIONS = [
+    {id:"goal", type:"choice", title:"Which of these sounds most like you right now?", options:[
+      {t:"I want to get lean, have abs, & visible definition"},{t:"I just want to lose weight…"},
+      {t:"I want to improve my health & longevity"},{t:"I want to pack on lean muscle & build size"}]},
+    {id:"age", type:"choice", title:"What best describes your age?", options:[
+      {t:"18-21", dq:true},{t:"21-29"},{t:"30-40"},{t:"40+"}]},
+    {id:"contact", type:"fields", title:"Full Name, Phone Number & Email", fields:[
+      {key:"name", label:"Full name", ac:"name"},
+      {key:"phone", label:"Phone number (with area code)", type:"tel", ac:"tel", ph:"(512) 555-0142"},
+      {key:"email", label:"Email", type:"email", ac:"email"}]},
+    {id:"country", type:"choice", title:"Where are you located?", options:[
+      {t:"USA or Canada"},{t:"UK", dq:true},{t:"Australia", dq:true},{t:"Other", dq:true}]},
+    {id:"invest", type:"choice", title:"If we establish that working together is the best way to move forward, What amount are you able to invest into your health?", options:[
+      {t:"I have no money to invest", dq:true},{t:"$750-$1,000"},{t:"$1k-$2k"},{t:"$3k+"}]}
+  ];
+  var answers = {}, at = 0, app = document.getElementById("app"), bar = document.querySelector("#bar i");
+  var started = false;
+
+  function el(tag, cls, txt){ var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
+  function show(node){ app.innerHTML = ""; app.appendChild(node); requestAnimationFrame(function(){ requestAnimationFrame(function(){ node.classList.add("in"); }); }); }
+  function setBar(n){ bar.style.width = Math.round(n * 100) + "%"; }
+
+  function openApply(e){
+    if (e) e.preventDefault();
+    var s = document.getElementById("apply");
+    s.classList.add("open");
+    if (!started){ started = true; HX.bus.send("started", {}); render(); }
+    s.scrollIntoView({behavior:"smooth", block:"start"});
+  }
+  document.querySelectorAll(".apply-link").forEach(function(a){ a.addEventListener("click", openApply); });
+
+  function render(){
+    var q = QUESTIONS[at]; setBar(at / QUESTIONS.length);
+    var wrap = el("div","step");
+    if (at > 0){ var b = el("button","back","← Back"); b.onclick = function(){ at--; render(); }; wrap.appendChild(b); }
+    wrap.appendChild(el("div","qnum","Question " + (at+1) + " of " + QUESTIONS.length));
+    var h = el("h1","q",q.title); wrap.appendChild(h);
+    if (q.type === "choice"){
+      var gap = el("div"); gap.style.marginTop = "18px"; wrap.appendChild(gap);
+      q.options.forEach(function(o,i){
+        var btn = el("button","opt"); if (answers[q.id] === o.t) btn.classList.add("sel");
+        btn.appendChild(el("span","key",String.fromCharCode(65+i))); btn.appendChild(el("span",null,o.t));
+        btn.onclick = function(){ pick(q,o,btn); };
+        wrap.appendChild(btn);
+      });
+    } else {
+      var inputs = {};
+      q.fields.forEach(function(f){
+        var lab = el("label",null,f.label); var inp = el("input"); inp.type = f.type || "text"; inp.autocomplete = f.ac || "";
+        if (f.ph) inp.placeholder = f.ph; inp.value = answers[f.key] || "";
+        var err = el("div","err",""); inputs[f.key] = {inp:inp, err:err, f:f};
+        inp.addEventListener("keydown", function(e){ if (e.key === "Enter"){ e.preventDefault(); submit(); } });
+        wrap.appendChild(lab); wrap.appendChild(inp); wrap.appendChild(err);
+      });
+      function submit(){
+        var ok = true;
+        Object.keys(inputs).forEach(function(k){
+          var x = inputs[k], v = x.inp.value.trim(), m = "";
+          if (!v) m = "This field is required";
+          else if (k === "email" && !/^\S+@\S+\.\S+$/.test(v)) m = "Please enter a valid email";
+          else if (k === "phone" && v.replace(/\D/g,"").length < 10) m = "Please include your area code, e.g. (512) 555-0142. Outside the US or Canada? Start with + and your country code.";
+          x.err.textContent = m; if (m) ok = false; else answers[k] = v;
+        });
+        if (!ok) return;
+        HX.bus.send("contact", {name:answers.name, phone:answers.phone, email:answers.email, goal:answers.goal, age:answers.age});
+        at++; render();
+      }
+      var row = el("div","nextrow"); var nb = el("button","next","OK"); nb.onclick = submit; row.appendChild(nb); row.appendChild(el("span","hint","press Enter ↵"));
+      wrap.appendChild(row);
+      setTimeout(function(){ var f = wrap.querySelector("input"); if (f) f.focus({preventScroll:true}); }, 300);
+    }
+    show(wrap);
+  }
+
+  function pick(q,o,btn){
+    answers[q.id] = o.t; btn.classList.add("sel");
+    HX.bus.send("answer", {id:q.id, value:o.t, n:at+1});
+    setTimeout(function(){
+      if (o.dq){ finish(false, q.id); return; }
+      if (at < QUESTIONS.length - 1){ at++; render(); } else finish(true);
+    }, 220);
+  }
+
+  document.addEventListener("keydown", function(e){
+    var q = QUESTIONS[at]; if (!started || !q || q.type !== "choice") return;
+    if (/^input|textarea$/i.test((e.target.tagName||""))) return;
+    var i = e.key.toUpperCase().charCodeAt(0) - 65;
+    if (e.key.length === 1 && i >= 0 && i < q.options.length){ var b = app.querySelectorAll(".opt")[i]; if (b) b.click(); }
+  });
+
+  function finish(ok, why){
+    setBar(1);
+    var wrap = el("div","step");
+    if (ok){
+      var chk = el("div","checking"); chk.appendChild(el("div","spin")); chk.appendChild(el("h1","q","Checking if you qualify…")); chk.appendChild(el("p","fin-p","This only takes a few seconds."));
+      wrap.appendChild(chk); show(wrap);
+      HX.bus.send("completed", {qualified:true, answers:answers});
+      setTimeout(function(){
+        var w2 = el("div","step");
+        w2.appendChild(el("h1","fin-h cal-h","Last step — book your call 👇"));
+        w2.appendChild(el("p","fin-p cal-p","Pick a day and time below — your details are already filled in."));
+        w2.appendChild(calendar());
+        show(w2);
+      }, 1400);
+    } else {
+      HX.bus.send("completed", {qualified:false, reason:why, answers:answers});
+      wrap.appendChild(el("h1","fin-h dq-h","I’m sorry to inform you we are no longer taking clients at the moment and are at full capacity."));
+      wrap.appendChild(el("p","fin-p","In the meantime feel free to check out my full 1 hour guide on how to get lean in the next 90 days (for free)."));
+      wrap.appendChild(el("p","fin-p","Thanks for your support!"));
+      var v = el("div","dq-video"); var yt = document.createElement("iframe");
+      yt.src = "https://www.youtube.com/embed/" + HX.DQ_VIDEO + "?rel=0"; yt.title = "Full 1 hour guide on how to get lean";
+      yt.allow = "accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"; yt.setAttribute("allowfullscreen","");
+      v.appendChild(yt); wrap.appendChild(v);
+      show(wrap);
+    }
+  }
+
+  /* ── the booking calendar ── */
+  function calendar(){
+    var box = el("div"); box.id = "cal";
+    var head = el("div","c-head"); var im = el("img"); im.src = HX.LOGO; im.style.objectFit = "contain"; head.appendChild(im);
+    var ht = el("div"); ht.appendChild(el("b",null,"Free Transformation Call")); ht.appendChild(el("span",null,"Huncho Program · 45 min · Zoom")); head.appendChild(ht); box.appendChild(head);
+    var body = el("div","c-body"); var month = el("div","c-month"); var times = el("div","c-times");
+    var now = new Date(), view = 0;
+    var picked = null, pickedTime = null, confirm = el("button","c-confirm","Confirm");
+    var mhead = el("h4"); mhead.style.display = "flex"; mhead.style.alignItems = "center";
+    var mtitle = el("span"); var prev = el("button",null,"‹"), nxt = el("button",null,"›");
+    [prev,nxt].forEach(function(b){ b.style.cssText = "border:0;background:#eef4ff;color:#0060e6;border-radius:50%;width:28px;height:28px;font-size:18px;cursor:pointer;margin-left:6px"; });
+    mtitle.style.marginRight = "auto"; mhead.appendChild(mtitle); mhead.appendChild(prev); mhead.appendChild(nxt);
+    var days = el("div","c-days");
+    month.appendChild(mhead); month.appendChild(days); body.appendChild(month);
+    prev.onclick = function(){ if (view > 0){ view--; drawMonth(); } };
+    nxt.onclick = function(){ if (view < 1){ view++; drawMonth(); } };
+    function drawMonth(){
+      var y = now.getFullYear(), m = now.getMonth() + view, first = new Date(y, m, 1);
+      mtitle.textContent = first.toLocaleString("en-US",{month:"long", year:"numeric"});
+      days.innerHTML = "";
+      ["S","M","T","W","T","F","S"].forEach(function(d){ days.appendChild(el("div","dow",d)); });
+      for (var i = 0; i < first.getDay(); i++) days.appendChild(el("div"));
+      var last = new Date(y, m+1, 0).getDate();
+      for (var d = 1; d <= last; d++){
+        (function(d){
+          var date = new Date(y, m, d);
+          var b = el("button",null,String(d));
+          var open = date > now && date.getDay() !== 0 && (date - now) < 15*864e5;
+          if (open){ b.className = "av"; b.onclick = function(){ days.querySelectorAll(".on").forEach(function(x){x.classList.remove("on");}); b.classList.add("on"); picked = date; slots(date); }; }
+          days.appendChild(b);
+        })(d);
+      }
+    }
+    drawMonth();
+    times.appendChild(el("h4",null,"Pick a day to see times"));
+    body.appendChild(times); box.appendChild(body);
+    box.appendChild(el("div","c-tz","Eastern Time - US & Canada"));
+    function slots(date){
+      times.innerHTML = ""; times.appendChild(el("h4",null,date.toLocaleDateString("en-US",{weekday:"long", month:"long", day:"numeric"})));
+      ["10:00am","11:30am","1:00pm","2:30pm","4:00pm","5:30pm","7:00pm"].forEach(function(t, i){
+        if ((date.getDate() + i) % 3 === 0) return;
+        var b = el("button",null,t); b.onclick = function(){ times.querySelectorAll(".on").forEach(function(x){x.classList.remove("on");}); b.classList.add("on"); pickedTime = t; confirm.style.display = "block"; };
+        times.appendChild(b);
+      });
+      confirm.style.display = "none"; times.appendChild(confirm);
+    }
+    confirm.onclick = function(){
+      var when = picked.toLocaleDateString("en-US",{weekday:"long", month:"long", day:"numeric"}) + " at " + pickedTime;
+      var whenISO = HX.etDate(picked.getFullYear(), picked.getMonth(), picked.getDate(), parseInt(pickedTime) + (/pm/.test(pickedTime) && parseInt(pickedTime) !== 12 ? 12 : 0), /:30/.test(pickedTime) ? 30 : 0).toISOString();
+      HX.bus.send("booked", {when:when, whenISO:whenISO, answers:answers});
+      try { sessionStorage.setItem("hx_when", when); sessionStorage.setItem("hx_whenISO", whenISO); } catch(e) {}
+      setTimeout(function(){ location.href = "thank-you.html"; }, 500);
+    };
+    return box;
+  }
+})();
+</script>
+</body>
+</html>

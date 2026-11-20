@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Huncho Program</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="data.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#070707;color:#fff;font-family:Inter,Arial,sans-serif;overflow-x:hidden}
+#ty-page{--ty-red:#e0141b;--u:min(1px,calc(100vw / 683));background:radial-gradient(ellipse 90% 55% at 50% 18%,#151515,#070707 72%);min-height:100vh}
+#ty-page > header{height:calc(116*var(--u));display:flex;align-items:center;justify-content:center}
+#ty-page > header img{width:calc(170*var(--u));min-width:110px;height:auto;transform:translateY(calc(5*var(--u)))}
+#ty-page > main{padding:0 16px 5rem}
+.confirm{width:100%;max-width:660px;margin:0 auto}
+.ty-warn{display:flex;align-items:center;min-height:calc(116*var(--u));margin:calc(19*var(--u)) 0 0;padding:calc(16*var(--u));border:1.5px solid #b5151a;border-radius:calc(12*var(--u));background:linear-gradient(180deg,#3b0709 0%,#22040560 100%),#1a0405;box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
+.ty-warn > svg{flex:none;width:calc(46*var(--u));min-width:28px;height:auto;color:var(--ty-red)}
+.ty-warn .ty-div{flex:none;width:1px;align-self:center;height:calc(52*var(--u));margin:0 calc(14*var(--u));background:rgba(255,255,255,.2)}
+.ty-wtext{flex:1;min-width:0;container-type:inline-size}
+.ty-warn h1{font-weight:700;font-size:5cqw;white-space:nowrap;letter-spacing:-.01em;line-height:1.2}
+.ty-warn h1 .hot{color:var(--ty-red);font-weight:800}
+.ty-reply{margin-top:calc(6*var(--u));font-weight:500;font-size:max(12px,3.35cqw);line-height:1.35;color:rgba(255,255,255,.9)}
+.confirmation-prompt{margin:calc(25*var(--u)) 0 0;font-weight:800;font-size:calc(44*var(--u));letter-spacing:-.035em;line-height:1.08;text-align:center}
+.prompt-line{display:block;white-space:nowrap}
+.ty-sub{margin-top:calc(16*var(--u));text-align:center;font-family:Arial,sans-serif;font-size:calc(22.5*var(--u));white-space:nowrap;letter-spacing:-.015em;color:rgba(255,255,255,.8)}
+.ty-sub span{display:inline-block;border-bottom:2px solid var(--ty-red)}
+.next-video{margin:calc(28*var(--u)) 0 0;aspect-ratio:16/9;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.22);box-shadow:0 12px 34px rgba(0,0,0,.55);isolation:isolate;background:#000}
+.yt-lite{position:relative;display:block;width:100%;height:100%;border:0;padding:0;background:#000;cursor:pointer}
+.yt-lite img{width:100%;height:100%;object-fit:cover;display:block}
+.yt-lite .playbtn{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:calc(78*var(--u));height:calc(78*var(--u));min-width:44px;min-height:44px;border-radius:50%;background:#e00a12;box-shadow:0 4px 16px rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center}
+.yt-lite .playbtn::after{content:"";border-left:16px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px}
+.yt-lite iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.ty-logo{display:block;width:calc(200*var(--u));min-width:130px;height:auto;margin:calc(24*var(--u)) auto 0;opacity:.92}
+.cal-btns{display:grid;gap:calc(13*var(--u));margin-top:calc(18*var(--u))}
+.cal-btn{display:grid;grid-template-columns:calc(34*var(--u)) minmax(0,1fr) calc(14*var(--u));align-items:center;gap:calc(26*var(--u));min-height:max(48px,calc(68*var(--u)));padding:6px calc(26*var(--u)) 6px calc(42*var(--u));border-radius:calc(10*var(--u));font-size:max(13px,calc(22*var(--u)));font-weight:600;color:#fff;text-decoration:none}
+.cal-btn svg{width:max(18px,calc(34*var(--u)));height:max(18px,calc(34*var(--u)))}
+.cal-btn.primary{background:linear-gradient(180deg,#e3141b 0%,#a8070c 100%);border:1px solid rgba(255,120,120,.35)}
+.cal-btn.ghost{background:linear-gradient(180deg,#262626,#111);border:1px solid rgba(255,255,255,.24)}
+.calendar-email-note{display:flex;align-items:center;width:fit-content;max-width:100%;margin:calc(30*var(--u)) auto 0;font-family:Arial,sans-serif}
+.calendar-email-note svg{flex:none;width:max(24px,calc(40*var(--u)));color:#fff}
+.calendar-email-note .ty-div{flex:none;width:1px;align-self:stretch;margin:0 calc(24*var(--u)) 0 calc(27*var(--u));background:rgba(255,255,255,.25)}
+.em-copy span{display:block}
+.em-copy span:first-child{font-size:max(13px,calc(18.5*var(--u)));font-weight:700}
+.em-copy span:last-child{margin-top:3px;font-size:max(12px,calc(16*var(--u)));color:rgba(255,255,255,.66)}
+.testimonials{max-width:1080px;margin:4rem auto 0;padding:0 16px}
+.testimonials-title{text-align:center;font-weight:800;font-size:clamp(22px,4vw,34px);letter-spacing:-.02em;margin-bottom:1.6rem}
+.vid-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+.vid .frame{aspect-ratio:16/9;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,.1)}
+.vid .cap{padding:.7rem .2rem 0}
+.vid .name{font-weight:700;font-size:1rem}
+.vid .stat{font-size:.85rem;color:rgba(255,255,255,.6);margin-top:2px}
+@media (max-width:900px){.vid-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.vid-grid{grid-template-columns:1fr}}
+footer{text-align:center;padding:3rem 1rem 2rem;font-size:.65rem;color:rgba(255,255,255,.3)}
+footer a{color:rgba(255,255,255,.4)}
+</style>
+</head>
+<body>
+<div id="ty-page">
+  <header><img id="logo" alt="Huncho Fit"></header>
+  <main>
+    <div class="confirm">
+      <div class="ty-warn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>
+        <span class="ty-div"></span>
+        <div class="ty-wtext">
+          <h1>YOUR CALL IS <span class="hot">NOT</span> CONFIRMED YET</h1>
+          <p class="ty-reply" id="when-line">Reply "YES" to the text we just sent you to lock it in.</p>
+        </div>
+      </div>
+      <p class="confirmation-prompt"><span class="prompt-line">Watch this 5-minute video</span><span class="prompt-line">to confirm your call</span></p>
+      <p class="ty-sub"><span>Unconfirmed calls are released to the waitlist after 24 hours.</span></p>
+      <div class="next-video"><button type="button" class="yt-lite" id="hero" aria-label="Play: Transformation Call"><img id="hero-img" alt="Transformation Call"><span class="playbtn"></span></button></div>
+      <img class="ty-logo" id="logo2" alt="Huncho Fit">
+      <div class="cal-btns">
+        <a class="cal-btn primary" href="#" id="add-apple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4.5" width="18" height="16.5" rx="3"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></svg><span>Add Meeting To Apple Calendar</span><span>&rsaquo;</span></a>
+        <a class="cal-btn ghost" href="#" id="add-google" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4.5" width="18" height="16.5" rx="3"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4M14 16.5h3"/></svg><span>Add Meeting To Google Calendar</span><span>&rsaquo;</span></a>
+      </div>
+      <div class="calendar-email-note">
+        <svg viewBox="0 0 32 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="1.5" y="1.5" width="29" height="21" rx="2.5"/><path d="M2.5 3l13.5 10.5L29.5 3"/></svg>
+        <span class="ty-div"></span>
+        <p class="em-copy"><span>Your invitation has been sent to your email.</span><span>Check your inbox (and spam) for the calendar invite.</span></p>
+      </div>
+    </div>
+  </main>
+  <div class="testimonials">
+    <p class="testimonials-title">Client Transformations</p>
+    <div class="vid-grid" id="grid"></div>
+  </div>
+  <footer>&copy; <span id="yr"></span> Southpaw Huncho. All rights reserved.<br><a href="mailto:support@sphuncho.com">support@sphuncho.com</a> &middot; 309 Coachman Drive, Simpsonville, SC 29681</footer>
+</div>
+<script>
+(function(){
+  document.getElementById("logo").src = HX.LOGO;
+  document.getElementById("logo2").src = HX.LOGO;
+  document.getElementById("yr").textContent = new Date().getFullYear();
+  var when = ""; try { when = sessionStorage.getItem("hx_when") || ""; } catch(e) {}
+  if (when) document.getElementById("when-line").textContent = when + " Eastern. Reply \"YES\" to our text to lock it in.";
+
+  /* Add to calendar: Google opens with the call filled in, Apple gets an .ics invite. */
+  var iso = ""; try { iso = sessionStorage.getItem("hx_whenISO") || ""; } catch(e) {}
+  var start = iso ? new Date(iso) : new Date(Date.now() + 864e5);
+  var end = new Date(start.getTime() + 45*60e3);
+  function stamp(d){ return d.toISOString().replace(/[-:]/g,"").replace(/\.\d{3}/,""); }
+  var title = "Huncho Program: Free Transformation Call";
+  var details = "Your free transformation call with the Huncho Program. The Zoom link is in your email invite.";
+  document.getElementById("add-google").href = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + encodeURIComponent(title) + "&dates=" + stamp(start) + "/" + stamp(end) + "&details=" + encodeURIComponent(details);
+  document.getElementById("add-apple").onclick = function(e){
+    e.preventDefault();
+    var ics = ["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Huncho Program//EN","BEGIN:VEVENT","UID:" + stamp(start) + "@hunchoprogram.com","DTSTAMP:" + stamp(new Date()),"DTSTART:" + stamp(start),"DTEND:" + stamp(end),"SUMMARY:" + title,"DESCRIPTION:" + details,"BEGIN:VALARM","TRIGGER:-PT1H","ACTION:DISPLAY","DESCRIPTION:Huncho call in 1 hour","END:VALARM","END:VEVENT","END:VCALENDAR"].join("\r\n");
+    var a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([ics], {type:"text/calendar"})); a.download = "huncho-call.ics";
+    document.body.appendChild(a); a.click(); a.remove();
+  };
+
+  function lite(btn, id, img){
+    img.src = "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg";
+    btn.onclick = function(){
+      var f = document.createElement("iframe");
+      f.src = "https://www.youtube.com/embed/" + id + "?autoplay=1&rel=0";
+      f.allow = "autoplay; encrypted-media; picture-in-picture"; f.setAttribute("allowfullscreen","");
+      btn.appendChild(f);
+      if (btn.id === "hero") HX.bus.send("confirm_video", {});
+    };
+  }
+  lite(document.getElementById("hero"), HX.CONFIRM_VIDEO, document.getElementById("hero-img"));
+
+  var grid = document.getElementById("grid");
+  HX.CASES.forEach(function(c){
+    var v = document.createElement("div"); v.className = "vid";
+    v.innerHTML = '<div class="frame"><button type="button" class="yt-lite"><img loading="lazy" alt=""><span class="playbtn"></span></button></div><div class="cap"><p class="name"></p><p class="stat"></p></div>';
+    v.querySelector(".name").textContent = c.name;
+    v.querySelector(".stat").textContent = c.stat;
+    v.querySelector("img").alt = c.name + " case study";
+    lite(v.querySelector(".yt-lite"), c.yt, v.querySelector("img"));
+    grid.appendChild(v);
+  });
+})();
+</script>
+</body>
+</html>

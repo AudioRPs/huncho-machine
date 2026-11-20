@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How Long Until You're Ripped? | Huncho Program</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Inter:wght@400;500;600;700;900&family=Poppins:ital,wght@0,300;0,700;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<script src="data.js"></script>
+<style>
+#ap-page h1{left:auto;transform:none}
+#tl{max-width:760px;margin:0 auto}
+#tl .apply-card{margin-top:2rem}
+#tl .grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+#apply .apply-card select{width:100%;padding:14px 40px 14px 16px;font-size:17px;line-height:1.3;background:var(--panel) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%238f98a8' stroke-width='2'%3E%3Cpath d='M1 1l5 5 5-5'/%3E%3C/svg%3E") no-repeat right 16px center;border:1px solid var(--line);border-radius:12px;color:var(--text);font-family:inherit;appearance:none;-webkit-appearance:none}
+#apply .apply-card select:focus{outline:none;border-color:var(--brand)}
+#apply .apply-card .tip{margin-top:6px}
+#tl .tip{font-size:12.5px;color:var(--muted);margin-top:6px;line-height:1.4}
+#tl .go{display:block;width:100%;margin-top:26px;background:var(--red);color:#fff;border:0;border-radius:9999px;padding:18px;font:900 1rem Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;box-shadow:0 6px 28px rgba(204,27,27,.55)}
+#res{display:none}
+#res.on{display:block}
+.r-card{margin-top:1.6rem;border-radius:1rem;border:1px solid rgba(255,255,255,.07);background:#08090c;box-shadow:0 32px 80px rgba(0,0,0,.8);padding:1.6rem 1.4rem}
+.r-kick{color:var(--red);font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.r-big{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:clamp(40px,8vw,64px);line-height:1;margin:8px 0 4px}
+.r-big span{color:var(--red)}
+.r-zone{font-size:18px;font-weight:700}
+.r-say{color:#aab1bd;font-size:15.5px;line-height:1.55;margin-top:8px}
+.meter{position:relative;margin:30px 4px 44px;height:14px;border-radius:99px;background:linear-gradient(90deg,#9e1414 0%,#c0581c 30%,#c9a227 55%,#2f9d5f 82%,#1f6f45 100%)}
+@media (max-width:640px){.meter .tick.sm b{display:none}}
+.meter .tick{position:absolute;top:-6px;width:2px;height:26px;background:rgba(255,255,255,.35)}
+.meter .tick b{position:absolute;top:30px;left:50%;transform:translateX(-50%);font-size:11.5px;color:#9aa2b0;white-space:nowrap;font-weight:600}
+.meter .you{position:absolute;top:-34px;transform:translateX(-50%);font:800 12px Inter,sans-serif;background:#fff;color:#000;border-radius:6px;padding:3px 7px;white-space:nowrap}
+.meter .you::after{content:"";position:absolute;left:50%;bottom:-5px;transform:translateX(-50%);border:5px solid transparent;border-top-color:#fff;border-bottom:0}
+.meter .dot{position:absolute;top:50%;width:22px;height:22px;border-radius:50%;background:#fff;border:4px solid #000;transform:translate(-50%,-50%)}
+.rows{display:grid;gap:10px;margin-top:6px}
+.row{display:grid;grid-template-columns:86px 1fr auto;align-items:center;gap:14px;background:#101319;border:1px solid #262b36;border-radius:12px;padding:14px 16px}
+.row .pc{font-family:var(--display);font-weight:900;font-size:30px;line-height:1}
+.row .pc.red{color:var(--red)}
+.row .what b{display:block;font-size:15px}
+.row .what span{font-size:13px;color:#8f98a8}
+.row .when{text-align:right}
+.row .when b{display:block;font-size:15px}
+.row .when span{font-size:12.5px;color:#8f98a8}
+.row.done{opacity:.45}
+.xmas{margin-top:14px;border:1px solid #3a2226;background:linear-gradient(180deg,#1a0d0f,#120a0b);border-radius:12px;padding:14px 16px;font-size:15px;line-height:1.5}
+.xmas b{color:#ff8a8a}
+.match{display:grid;grid-template-columns:200px 1fr;gap:16px;align-items:center;margin-top:12px}
+.match .fr{aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:#000;position:relative;cursor:pointer;border:1px solid rgba(255,255,255,.12)}
+.match .fr img{width:100%;height:100%;object-fit:cover;display:block}
+.match .fr iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.match .fr .pl{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:46px;height:46px;border-radius:50%;background:#e00a12;display:flex;align-items:center;justify-content:center}
+.match .fr .pl::after{content:"";border-left:13px solid #fff;border-top:8px solid transparent;border-bottom:8px solid transparent;margin-left:3px}
+.match h4{font-size:18px}
+.match p{color:#aab1bd;font-size:14.5px;line-height:1.5;margin-top:4px}
+.send{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;margin-top:12px}
+.send input{padding:14px 16px;font-size:16px;background:#101319;border:1px solid #262b36;border-radius:12px;color:#f2f4f8;font-family:inherit;min-width:0}
+.send input:focus{outline:none;border-color:var(--red)}
+.send button{background:#fff;color:#000;border:0;border-radius:12px;padding:0 20px;font:800 14px Inter,sans-serif;cursor:pointer;white-space:nowrap}
+.sent{display:none;margin-top:12px;color:#21c17a;font-weight:600;font-size:14.5px}
+.fine{font-size:11.5px;color:rgba(255,255,255,.3);margin-top:14px;line-height:1.5}
+h3.sec{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:26px;letter-spacing:.03em;margin:0 0 10px}
+h3.sec span{color:var(--red)}
+@media (max-width:640px){#tl .grid2{grid-template-columns:1fr}.match{grid-template-columns:1fr}.send{grid-template-columns:1fr}.send button{padding:14px}.row{grid-template-columns:64px 1fr}.row .when{grid-column:2;text-align:left}}
+</style>
+</head>
+<body>
+<div id="ap-page">
+  <div class="topbar"><img class="top-logo" id="logo" alt="Huncho Fit"></div>
+  <div class="wrap">
+    <h1 class="h1-desktop">How Long Until <span class="red">You're Ripped?</span><br>The Reality Check</h1>
+    <h1 class="h1-mobile">How Long Until<br><span class="red">You're Ripped?</span><br>The Reality Check</h1>
+    <p class="sub">60 seconds. Your real numbers. No sugarcoating.</p>
+
+    <div id="tl">
+      <div id="apply" class="open">
+        <div class="apply-card" id="form">
+          <div class="qnum">Your numbers</div>
+          <div class="grid2">
+            <div><label for="age">Age</label><input id="age" type="number" inputmode="numeric" min="18" max="80" placeholder="38"></div>
+            <div><label for="wt">Weight (lbs)</label><input id="wt" type="number" inputmode="numeric" min="100" max="450" placeholder="215"></div>
+            <div><label for="ft">Height</label>
+              <div class="grid2" style="gap:0 10px">
+                <select id="ft"><option value="5">5 ft</option><option value="6">6 ft</option><option value="4">4 ft</option><option value="7">7 ft</option></select>
+                <select id="in"></select>
+              </div>
+            </div>
+            <div><label for="waist">Waist at your belly button (inches)</label><input id="waist" type="number" inputmode="decimal" min="24" max="70" step="0.5" placeholder="38"><div class="tip">Tape flat on the skin, standing, don't suck it in. Keep it real.</div></div>
+          </div>
+          <label for="lift">How long have you been lifting?</label>
+          <select id="lift">
+            <option value="0">I don't lift yet</option>
+            <option value="1">Under a year</option>
+            <option value="2" selected>1 to 3 years</option>
+            <option value="3">3+ years and still not lean</option>
+          </select>
+          <div class="err" id="ferr"></div>
+          <button class="go" id="go">Show Me My Timeline</button>
+        </div>
+      </div>
+
+      <div id="res">
+        <div class="r-card">
+          <div class="r-kick">Where you are right now</div>
+          <div class="r-big">About <span id="bf">--</span>% body fat</div>
+          <div class="r-zone" id="zone"></div>
+          <p class="r-say" id="say"></p>
+          <div class="meter" id="meter"></div>
+        </div>
+
+        <div class="r-card">
+          <h3 class="sec">Your <span>Timeline</span></h3>
+          <div class="rows" id="rows"></div>
+          <div class="xmas" id="xmas"></div>
+        </div>
+
+        <div class="r-card">
+          <h3 class="sec">The client who started <span>where you are</span></h3>
+          <div class="match" id="match"></div>
+        </div>
+
+        <div class="r-card">
+          <h3 class="sec">Want me to <span>take you there?</span></h3>
+          <p class="r-say" style="margin-top:0">Every man on my wall started with one call. We look at these exact numbers and build the plan around your life.</p>
+          <a href="index.html#apply" class="cta apply-link" style="max-width:none;margin-top:18px">Click Here To Apply</a>
+          <p class="r-say" style="margin-top:22px">Not ready yet? Get this timeline sent to you.</p>
+          <div class="send"><input id="sn" placeholder="First name" autocomplete="given-name"><input id="se" type="email" placeholder="Email" autocomplete="email"><button id="sb">Send it to me</button></div>
+          <div class="sent" id="sent"></div>
+          <p class="fine">This is an estimate from your height and waist, not a medical test. Real results depend on the work. Results shown are from specific clients and are not a guarantee of your results.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="foot-mark">SOUTHPAW&nbsp;<span class="red">HUNCHO</span></div>
+    <p class="foot-line">&copy; <span id="yr"></span> Southpaw Huncho. All rights reserved.</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  document.getElementById("logo").src = HX.LOGO;
+  document.getElementById("yr").textContent = new Date().getFullYear();
+  var ins = document.getElementById("in");
+  for (var i = 0; i < 12; i++){ var o = document.createElement("option"); o.value = i; o.textContent = i + " in"; if (i === 10) o.selected = true; ins.appendChild(o); }
+
+  var R = null;
+  function $(id){ return document.getElementById(id); }
+  function el(t,c,x){ var e = document.createElement(t); if (c) e.className = c; if (x != null) e.textContent = x; return e; }
+
+  /* Body fat from height and waist (Relative Fat Mass, men): 64 - 20 x height / waist. */
+  function bodyFat(hIn, waist){ return Math.max(6, Math.min(50, 64 - 20 * (hIn / waist))); }
+
+  /* Pace taken from his own clients: Dion 28% to 14% in 90 days, Jonathan 25% to 12%,
+     Ammar 20% to 10%. Body fat drops about 0.9 points a week above 20%, 0.7 between 15% and 20%,
+     0.5 below 15%. Lean mass held, so the weight follows from the body fat. */
+  function pace(bf){ return bf > 20 ? 0.9 : bf > 15 ? 0.7 : 0.5; }
+  function weeksTo(target, w, bf){
+    var lean = w * (1 - bf/100), weeks = 0;
+    while (bf > target && weeks < 200){ bf -= pace(bf); weeks++; }
+    return {weeks:weeks, weight:Math.round(lean / (1 - Math.max(bf, target)/100))};
+  }
+  function bfAfter(weeksN, w, bf){
+    for (var i = 0; i < weeksN && bf > 9; i++) bf -= pace(bf);
+    return bf;
+  }
+  function dateIn(weeks){ var d = new Date(); d.setDate(d.getDate() + weeks * 7); return d.toLocaleDateString("en-US",{month:"long", day:"numeric", year:"numeric"}); }
+
+  function zone(bf, lift){
+    if (bf >= 30) return ["The gut is running the show", "Real talk bro, this is the zone where the shirts stop fitting and the energy's gone. Good news: this is where the scale moves fastest. Gio started at 260."];
+    if (bf >= 25) return ["Dad bod territory", "The muscle is in there. Nobody can see it. Every month here is another beach day saying \"nah I'm good, I burn easy.\""];
+    if (bf >= 20) return [lift >= 2 ? "You lift. Nobody can tell." : "Soft, not fat", lift >= 2 ? "Muscle with fat on top just looks like fat. You don't need more gym, you need the layer gone." : "You're closer than you think. This is the stretch where most guys quit because week 3 feels like nothing's happening."];
+    if (bf >= 15) return ["The last layer is hiding your abs", "This is the frustrating part. You look good in a shirt but not without one. Lower belly is the last to go and it's where guys give up."];
+    if (bf >= 12) return ["Almost there", "Abs in good light. A few more weeks and it's abs in any light."];
+    return ["You're already lean bro", "At this point it's about building size while staying here. Different game."];
+  }
+
+  $("go").onclick = function(){
+    var age = +$("age").value, w = +$("wt").value, waist = +$("waist").value, h = (+$("ft").value) * 12 + (+$("in").value), lift = +$("lift").value;
+    if (!age || !w || !waist){ $("ferr").textContent = "Put in your age, weight and waist. Keep it real."; return; }
+    if (age < 18 || w < 90 || waist < 22 || waist > 75){ $("ferr").textContent = "Double check those numbers bro."; return; }
+    $("ferr").textContent = "";
+    var bf = bodyFat(h, waist);
+    R = {age:age, w:w, waist:waist, h:h, lift:lift, bf:bf};
+    var z = zone(bf, lift);
+    $("bf").textContent = Math.round(bf); $("zone").textContent = z[0]; $("say").textContent = z[1];
+
+    /* the meter: 40% on the left down to 8% on the right */
+    var m = $("meter"); m.innerHTML = "";
+    function pos(v){ return Math.max(0, Math.min(100, (40 - v) / 32 * 100)); }
+    [30,20,15,12,10].forEach(function(v){ var t = el("div","tick" + (v === 15 || v === 10 ? " sm" : "")); t.style.left = pos(v) + "%"; t.appendChild(el("b",null,v + "%")); m.appendChild(t); });
+    var d = el("div","dot"); d.style.left = pos(bf) + "%"; m.appendChild(d);
+    var y = el("div","you","YOU, " + Math.round(bf) + "%"); y.style.left = pos(bf) + "%"; m.appendChild(y);
+
+    /* the rows */
+    var rows = $("rows"); rows.innerHTML = "";
+    [[20,"Shirts start fitting different","People notice before you do"],
+     [15,"Outline of the abs","The face sharpens up"],
+     [12,"Abs in normal light","Where most of my clients land"],
+     [10,"RIPPED","Jawline, veins, the whole thing"]].forEach(function(s){
+      var r = el("div","row" + (bf <= s[0] ? " done" : ""));
+      var pc = el("div","pc" + (s[0] <= 12 ? " red" : ""), s[0] + "%"); r.appendChild(pc);
+      var wh = el("div","what"); wh.appendChild(el("b",null,s[1])); wh.appendChild(el("span",null,s[2])); r.appendChild(wh);
+      var wn = el("div","when");
+      if (bf <= s[0]){ wn.appendChild(el("b",null,"Already there")); }
+      else { var x = weeksTo(s[0], w, bf); wn.appendChild(el("b",null,"~" + x.weeks + " weeks")); wn.appendChild(el("span",null,"by " + dateIn(x.weeks) + " · ~" + x.weight + " lbs")); }
+      r.appendChild(wn); rows.appendChild(r);
+    });
+    var to12 = bf > 12 ? weeksTo(12, w, bf) : {weeks:0, weight:w};
+    R.weeks = to12.weeks;
+
+    /* Christmas */
+    var now = new Date(), xm = new Date(now.getFullYear(), 11, 25); if (xm < now) xm = new Date(now.getFullYear()+1, 11, 25);
+    var wk = Math.max(0, Math.floor((xm - now) / (7*864e5)));
+    var atX = bfAfter(wk, w, bf);
+    $("xmas").innerHTML = "";
+    var xs = el("span"); xs.innerHTML = "<b>By Christmas</b> (" + wk + " weeks): start this week and you'd be around <b>" + Math.round(atX) + "%</b>. Wait until January like everybody else and you're starting from " + Math.round(bf) + "% with " + wk + " fewer weeks. Monday got a restraining order on you bro 😂";
+    $("xmas").appendChild(xs);
+
+    /* the client who started closest to him */
+    var best = null, bs = 1e9;
+    HX.CASES.forEach(function(c){
+      var s = 0;
+      if (c.bf) s += Math.abs(c.bf[0] - bf) * 2; else s += 14;
+      if (c.age) s += Math.abs(c.age - age) * 0.8; else s += 8;
+      if (s < bs){ bs = s; best = c; }
+    });
+    var mt = $("match"); mt.innerHTML = "";
+    var fr = el("div","fr"); var im = el("img"); im.src = HX.ytThumb(best.yt); im.alt = best.name; fr.appendChild(im); fr.appendChild(el("span","pl"));
+    fr.onclick = function(){ var f = document.createElement("iframe"); f.src = "https://www.youtube.com/embed/" + best.yt + "?autoplay=1&rel=0"; f.allow = "autoplay; encrypted-media"; f.setAttribute("allowfullscreen",""); fr.appendChild(f); };
+    mt.appendChild(fr);
+    var tx = el("div"); tx.appendChild(el("h4",null,best.name)); tx.appendChild(el("p",null,best.stat + ". He started close to where you are right now. Watch what changed."));
+    mt.appendChild(tx);
+
+    $("res").classList.add("on");
+    setTimeout(function(){ $("res").scrollIntoView({behavior:"smooth", block:"start"}); }, 60);
+    HX.bus.send("timeline_run", {bf:Math.round(bf), weeks:to12.weeks});
+  };
+
+  $("sb").onclick = function(){
+    var n = $("sn").value.trim(), e = $("se").value.trim();
+    if (!n || !/^\S+@\S+\.\S+$/.test(e)){ $("sent").style.display = "block"; $("sent").style.color = "#ff6b6b"; $("sent").textContent = "Put in your first name and a real email."; return; }
+    $("sent").style.color = "#21c17a"; $("sent").style.display = "block";
+    $("sent").textContent = "Sent. Check your inbox " + n + " 💪";
+    HX.bus.send("timeline_lead", {name:n, email:e, bf:R ? Math.round(R.bf) : "?", weeks:R ? R.weeks : "?"});
+  };
+})();
+</script>
+</body>
+</html>
