@@ -20,6 +20,9 @@
 #apply .apply-card .tip{margin-top:6px}
 #tl .tip{font-size:12.5px;color:var(--muted);margin-top:6px;line-height:1.4}
 #tl .go{display:block;width:100%;margin-top:26px;background:var(--red);color:#fff;border:0;border-radius:9999px;padding:18px;font:900 1rem Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;box-shadow:0 6px 28px rgba(204,27,27,.55)}
+#tl .enter-hint{text-align:center;color:var(--muted);font-size:13px;margin-top:12px}
+#tl .enter-hint b{display:inline-block;border:1px solid var(--line);border-radius:5px;padding:1px 8px;margin-left:4px;color:#c9ced8;font-weight:600}
+@media (hover:none){#tl .enter-hint{display:none}}
 #res{display:none}
 #res.on{display:block}
 .r-card{margin-top:1.6rem;border-radius:1rem;border:1px solid rgba(255,255,255,.07);background:#08090c;box-shadow:0 32px 80px rgba(0,0,0,.8);padding:1.6rem 1.4rem}
@@ -98,6 +101,7 @@ h3.sec span{color:var(--red)}
           </select>
           <div class="err" id="ferr"></div>
           <button class="go" id="go">Show Me My Timeline</button>
+          <p class="enter-hint">or press <b>Enter &#8629;</b></p>
         </div>
       </div>
 
@@ -238,6 +242,14 @@ h3.sec span{color:var(--red)}
     setTimeout(function(){ $("res").scrollIntoView({behavior:"smooth", block:"start"}); }, 60);
     HX.bus.send("timeline_run", {bf:Math.round(bf), weeks:to12.weeks});
   };
+
+  /* Enter runs the timeline from any box in the form, and sends it from the email boxes. */
+  document.querySelectorAll("#form input, #form select").forEach(function(f){
+    f.addEventListener("keydown", function(e){ if (e.key === "Enter"){ e.preventDefault(); $("go").click(); } });
+  });
+  ["sn","se"].forEach(function(id){
+    $(id).addEventListener("keydown", function(e){ if (e.key === "Enter"){ e.preventDefault(); $("sb").click(); } });
+  });
 
   $("sb").onclick = function(){
     var n = $("sn").value.trim(), e = $("se").value.trim();
