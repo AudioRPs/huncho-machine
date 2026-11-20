@@ -98,7 +98,11 @@
   var started = false;
 
   function el(tag, cls, txt){ var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
-  function show(node){ app.innerHTML = ""; app.appendChild(node); requestAnimationFrame(function(){ requestAnimationFrame(function(){ node.classList.add("in"); }); }); }
+  function show(node){
+    app.innerHTML = ""; app.appendChild(node);
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ node.classList.add("in"); }); });
+    setTimeout(function(){ node.classList.add("in"); }, 60);
+  }
   function setBar(n){ bar.style.width = Math.round(n * 100) + "%"; }
 
   function openApply(e){
